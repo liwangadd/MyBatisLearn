@@ -3,6 +3,7 @@ package com.windylee.lession2;
 import com.windylee.lession2.entity.SysRole;
 import com.windylee.lession2.entity.SysUser;
 import com.windylee.lession2.service.UserMapper;
+import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
@@ -103,6 +104,58 @@ public class UserMapperTest extends BaseMapperTest{
             System.out.println(user.getId());
         }finally {
             sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testInsertById(){
+        SqlSession sqlSession=getSqlSession();
+        try{
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            SysUser user = userMapper.selectById(1l);
+            Assert.assertEquals("admin", user.getUserName());
+            user.setUserName("admin_test");
+            user.setUserEmail("test@mybatis.tk");
+            int result = userMapper.updateById(user);
+            Assert.assertEquals(1, result);
+            user=userMapper.selectById(1l);
+            Assert.assertEquals("admin_test", user.getUserName());
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testDeleteById(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            SysUser user1 = userMapper.selectById(1l);
+            Assert.assertNotNull(user1);
+            Assert.assertEquals(1, userMapper.deleteById(1l));
+            Assert.assertNull(userMapper.selectById(1l));
+
+            SysUser user2 = userMapper.selectById(1001l);
+            Assert.assertNotNull(user2);
+            Assert.assertEquals(1, userMapper.deleteById(user2));
+            Assert.assertNull(userMapper.selectById(1001l));
+        }finally {
+            sqlSession.rollback();
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectRolesByUserIdAndRoleEnabled(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            List<SysRole> roles = userMapper.selectRolesByUserIdAndRoleEnabled(1l, 1);
+            Assert.assertNotNull(roles);
+            Assert.assertTrue(roles.size()>0);
+        }finally {
             sqlSession.close();
         }
     }
