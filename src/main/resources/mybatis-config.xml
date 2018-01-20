@@ -28,8 +28,8 @@
     <mappers>
         <!--<mapper resource="mybatis/CountryMapper.xml"/>-->
         <mapper resource="com/windylee/lession2/service/UserMapper.xml"/>
-        <!--<mapper resource="mybatis/RoleMapper.xml"/>-->
-        <!--<mapper resource="mybatis/PrivilegeMapper.xml"/>-->
+        <mapper resource="com/windylee/lession2/service/RoleMapper.xml"/>
+        <mapper resource="com/windylee/lession2/service/PrivilegeMapper.xml"/>
         <!--<mapper resource="mybatis/RolePrivilegeMapper.xml"/>-->
         <!--<mapper resource="mybatis/UserRoleMapper.xml"/>-->
         <!--<package name="com.windylee.lession2.service"/>-->

@@ -109,7 +109,7 @@ public class UserMapperTest extends BaseMapperTest{
     }
 
     @Test
-    public void testInsertById(){
+    public void testUpdateById(){
         SqlSession sqlSession=getSqlSession();
         try{
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
