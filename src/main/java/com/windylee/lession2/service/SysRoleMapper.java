@@ -93,4 +93,10 @@ public interface SysRoleMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(SysRole record);
+
+    List<SysRole> selectAllRoleAndPrivileges();
+
+    List<SysRole> selectRoleByUserId();
+
+    List<SysRole> selectRoleByUserIdChoose();
 }

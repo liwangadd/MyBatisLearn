@@ -93,4 +93,7 @@ public interface SysPrivilegeMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(SysPrivilege record);
+
+    List<SysPrivilege> selectPrivilegeByRoleId(Long roleId);
+
 }

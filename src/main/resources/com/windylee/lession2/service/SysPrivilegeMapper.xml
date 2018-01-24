@@ -240,4 +240,11 @@
       privilege_url = #{privilegeUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectPrivilegeByRoleId" resultMap="privilegeMap">
+    SELECT p.id, p.privilege_name, p.privilege_url
+    FROM sys_privilege p
+    JOIN sys_role_privilege rp ON rp.role_id = p.id
+    WHERE rp.role_id = #{roleId}
+  </select>
 </mapper>

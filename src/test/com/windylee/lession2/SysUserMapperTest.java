@@ -318,6 +318,7 @@ public class SysUserMapperTest extends BaseMapperTest {
             sqlSession.close();
         }
     }
+
     @Test
     public void testSelectUserAndRoleById3(){
         SqlSession sqlSession = getSqlSession();
@@ -331,5 +332,56 @@ public class SysUserMapperTest extends BaseMapperTest {
         }
     }
 
+    @Test
+    public void testSelectUserAndRoleByIdSelect(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            SysUserMapper userMapper = sqlSession.getMapper(SysUserMapper.class);
+            SysUser user = userMapper.selectUserAndRoleByIdSelect(1001l);
+            Assert.assertNotNull(user);
+            System.out.println("调用user.getRole()");
+            Assert.assertNotNull(user.getRole());
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectAllUserAndRoles(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            SysUserMapper userMapper = sqlSession.getMapper(SysUserMapper.class);
+            List<SysUser> users = userMapper.selectAllUserAndRoles();
+            System.out.println("用户数：" + users.size());
+            users.forEach(user->{
+                System.out.println("用户名：" + user.getUserName());
+                user.getRoleList().forEach(role->{
+                    System.out.println("角色名：" + role.getRoleName());
+                    role.getPrivilegeList().forEach(privilege-> System.out.println("权限名：" + privilege.getPrivilegeName()));
+                });
+            });
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectAllUserAndRolesSelect(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            SysUserMapper userMapper = sqlSession.getMapper(SysUserMapper.class);
+            List<SysUser> users = userMapper.selectAllUserAndRolesSelect();
+            System.out.println("用户数：" + users.size());
+            users.forEach(user->{
+                System.out.println("用户名：" + user.getUserName());
+                user.getRoleList().forEach(role->{
+                    System.out.println("角色名：" + role.getRoleName());
+                    role.getPrivilegeList().forEach(privilege-> System.out.println("权限名：" + privilege.getPrivilegeName()));
+                });
+            });
+        }finally {
+            sqlSession.close();
+        }
+    }
 
 }

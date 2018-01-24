@@ -60,7 +60,28 @@
 
     <resultMap id="userRoleMap" type="com.windylee.lession2.entity.SysUser"
                extends="userMap">
-        <association property="role" columnPrefix="role_" resultMap="com.windylee.lession2.service.SysRoleMapper.roleMap"/>
+        <association property="role" columnPrefix="role_"
+                     resultMap="com.windylee.lession2.service.SysRoleMapper.roleMap"/>
+    </resultMap>
+
+    <resultMap id="userRoleMapSelect" type="com.windylee.lession2.entity.SysUser"
+               extends="userMap">
+        <association property="role" column="{id=role_id}"
+                     select="com.windylee.lession2.service.SysRoleMapper.selectByPrimaryKey"
+                     fetchType="lazy"/>
+    </resultMap>
+
+    <resultMap id="userRoleListMap" type="com.windylee.lession2.entity.SysUser"
+               extends="userMap">
+        <collection property="roleList" columnPrefix="role_"
+                    resultMap="com.windylee.lession2.service.SysRoleMapper.rolePrivilegeListMap"/>
+    </resultMap>
+
+    <resultMap id="userRoleListMapSelect" type="com.windylee.lession2.entity.SysUser"
+               extends="userMap">
+        <collection property="roleList" column="{userId = id}"
+                    fetchType="lazy"
+                    select="com.windylee.lession2.service.SysRoleMapper.selectRoleByUserId"/>
     </resultMap>
 
     <sql id="Example_Where_Clause">
@@ -618,5 +639,29 @@
         JOIN sys_user_role ur ON ur.user_id = u.id
         JOIN sys_role r ON ur.role_id = r.id
         WHERE u.id = #{id}
+    </select>
+
+    <select id="selectUserAndRoleByIdSelect" resultMap="userRoleMapSelect">
+        SELECT u.id, u.user_name, u.user_password, u.user_email, u.user_info, u.head_img, u.create_time, ur.role_id
+        FROM sys_user u
+        JOIN sys_user_role ur on ur.user_id = u.id
+        WHERE u.id = #{id}
+    </select>
+
+    <select id="selectAllUserAndRoles" resultMap="userRoleListMap">
+        SELECT u.id, u.user_name, u.user_password, u.user_email, u.user_info, u.head_img, u.create_time,
+        r.id "role_id", r.role_name "role_role_name", r.enabled "role_enabled", r.role_name "role_role_name", r.create_by "role_create_by",
+        r.create_time "role_create_time",
+        p.id "role_privilege_id", p.privilege_name "role_privilege_privilege_name", p.privilege_url "role_privilege_privilege_url"
+        FROM sys_user u
+        JOIN sys_user_role ur on ur.user_id = u.id
+        JOIN sys_role r on ur.role_id = r.id
+        JOIN sys_role_privilege rp on rp.role_id = r.id
+        JOIN sys_privilege p on rp.privilege_id = p.id
+    </select>
+
+    <select id="selectAllUserAndRolesSelect" resultMap="userRoleListMapSelect">
+        SELECT u.id, u.user_name, u.user_password, u.user_email, u.user_info, u.head_img, u.create_time
+        FROM sys_user u
     </select>
 </mapper>
