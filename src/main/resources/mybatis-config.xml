@@ -13,6 +13,11 @@
         <package name="com.windylee.lession1.entity"/>
     </typeAliases>
 
+    <typeHandlers>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
+                     javaType="com.windylee.lession2.type.Enabled"/>
+    </typeHandlers>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>

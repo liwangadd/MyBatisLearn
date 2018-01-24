@@ -1,5 +1,7 @@
 package com.windylee.lession2.entity;
 
+import com.windylee.lession2.type.Enabled;
+
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class SysRole {
      *
      * @mbggenerated
      */
-    private Integer enabled;
+    private Enabled enabled;
 
     /**
      * Database Column Remarks:
@@ -118,7 +120,7 @@ public class SysRole {
      * @return the value of sys_role.enabled
      * @mbggenerated
      */
-    public Integer getEnabled() {
+    public Enabled getEnabled() {
         return enabled;
     }
 
@@ -129,7 +131,7 @@ public class SysRole {
      * @param enabled the value for sys_role.enabled
      * @mbggenerated
      */
-    public void setEnabled(Integer enabled) {
+    public void setEnabled(Enabled enabled) {
         this.enabled = enabled;
     }
 

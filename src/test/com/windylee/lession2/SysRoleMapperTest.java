@@ -3,6 +3,7 @@ package com.windylee.lession2;
 import com.windylee.lession2.entity.SysRole;
 import com.windylee.lession2.service.RoleMapper;
 import com.windylee.lession2.service.SysRoleMapper;
+import com.windylee.lession2.type.Enabled;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,8 +17,8 @@ public class SysRoleMapperTest extends BaseMapperTest{
     public void testSelectById(){
         SqlSession sqlSession = getSqlSession();
         try{
-            RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
-            SysRole role = roleMapper.selectById(1l);
+            SysRoleMapper roleMapper = sqlSession.getMapper(SysRoleMapper.class);
+            SysRole role = roleMapper.selectByPrimaryKey(1l);
             Assert.assertNotNull(role);
             Assert.assertEquals("管理员", role.getRoleName());
         }finally {
@@ -61,7 +62,7 @@ public class SysRoleMapperTest extends BaseMapperTest{
             role.setRoleName("普通员工");
             role.setCreateBy(1l);
             role.setCreateTime(new Date());
-            role.setEnabled(1);
+            role.setEnabled(Enabled.enabled);
             int result = roleMapper.insert(role);
             Assert.assertEquals(1, result);
             Assert.assertNull(role.getId());
@@ -80,7 +81,7 @@ public class SysRoleMapperTest extends BaseMapperTest{
             role.setRoleName("普通员工");
             role.setCreateBy(1l);
             role.setCreateTime(new Date());
-            role.setEnabled(1);
+            role.setEnabled(Enabled.enabled);
             int result = roleMapper.insert2(role);
             Assert.assertEquals(1, result);
             Assert.assertNotNull(role.getId());
@@ -100,7 +101,7 @@ public class SysRoleMapperTest extends BaseMapperTest{
             role.setRoleName("普通员工");
             role.setCreateBy(1l);
             role.setCreateTime(new Date());
-            role.setEnabled(1);
+            role.setEnabled(Enabled.enabled);
             int result = roleMapper.insert3(role);
             Assert.assertEquals(1, result);
             Assert.assertNotNull(role.getId());
@@ -164,7 +165,7 @@ public class SysRoleMapperTest extends BaseMapperTest{
         try{
             SysRoleMapper roleMapper = sqlSession.getMapper(SysRoleMapper.class);
             SysRole record = roleMapper.selectByPrimaryKey(2l);
-            record.setEnabled(0);
+            record.setEnabled(Enabled.disabled);
             roleMapper.updateByPrimaryKey(record);
             List<SysRole> roleList = roleMapper.selectRoleByUserIdChoose();
             roleList.forEach(role->{
