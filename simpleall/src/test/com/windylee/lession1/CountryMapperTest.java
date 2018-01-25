@@ -4,15 +4,13 @@ import com.windylee.lession1.entity.Country;
 import com.windylee.lession1.entity.CountryExample;
 import com.windylee.lession1.service.CountryMapper;
 import com.windylee.lession2.BaseMapperTest;
-import com.windylee.lession2.service.UserMapper;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 
-public class CountryMapperTest extends BaseMapperTest{
+public class CountryMapperTest extends BaseMapperTest {
 
     @Test
     public void testSelectAll(){

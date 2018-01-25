@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MyBatisLearn.iml" filepath="$PROJECT_DIR$/MyBatisLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyBatisLearn.iml" filepath="$PROJECT_DIR$/.idea/MyBatisLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simpleall/simple-all.iml" filepath="$PROJECT_DIR$/simpleall/simple-all.iml" />
     </modules>
   </component>
 </project>
