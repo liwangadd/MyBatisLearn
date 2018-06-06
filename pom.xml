@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>simpleall</module>
+        <module>mybatis-spring</module>
     </modules>
 
     <properties>
